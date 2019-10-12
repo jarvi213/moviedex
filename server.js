@@ -7,7 +7,8 @@ const Data = require("./Database.js");
 const cors = require('cors')
 const helmet = require('helmet')  
 
-app.use(morgan("dev"));
+const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
+app.use(morgan(morganSetting))
 
 app.use(function validateMovieToken(req, res, next) {
   const authToken = req.get("Authorization")
