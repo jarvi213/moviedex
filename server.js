@@ -11,7 +11,7 @@ const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
 app.use(morgan(morganSetting))
 
 app.use(function validateMovieToken(req, res, next) {
-  const authToken = req.get("Authorization")
+  const authToken = req.get("Authorization").split(" ")[1];
   const apiToken = process.env.API_TOKEN
 
   if (!authToken || authToken !== apiToken) {
